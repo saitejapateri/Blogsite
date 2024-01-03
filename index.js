@@ -1,3 +1,8 @@
+$(document).ready(function() {
+    setTimeout(function(){
+        $('.loader_bg').fadeToggle();
+    }, 1500);
+  });
 
 var firstBlog=true;
 document.addEventListener('DOMContentLoaded', function () {
