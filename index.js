@@ -5,8 +5,8 @@ $(document).ready(function() {
   });
 
 //search logo
-var searchLogo=document.getElementById("searchLogo");
-var searchForm=document.getElementById("searchForm");
+var searchLogo = document.getElementById("searchLogo");
+var searchForm = document.getElementById("searchForm");
 searchLogo.addEventListener('click',()=>{
     searchLogo.style.display="none";
     searchForm.classList.replace('d-none','d-flex');
@@ -61,13 +61,56 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
             });
+
+            var allTitles = blogDataList.map(post => post.heading.toLowerCase());
+            console.log(allTitles)
+            var suggestionsList = document.getElementById('suggestions-list');
+            console.log(suggestionsList)
+    
+            allTitles.forEach(title => {
+                var option = document.createElement('option');
+                option.value = title;
+                suggestionsList.appendChild(option);
+            });
+
+            var searchInput = document.getElementById('search-item');
+            searchInput.addEventListener('focus', function () {
+                searchInput.setAttribute('list', 'suggestions-list');
+            });
+
+            
+            searchInput.addEventListener('input', function () {
+                var value = searchInput.value.toLowerCase();
+                console.log(value);
+                filterSuggestions(allTitles, suggestionsList, value);
+            });
+
+            searchForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                var value = searchInput.value.toLowerCase();
+                console.log(value);
+                // Search based on title
+                var filteredBlogs = blogDataList.filter(blog => blog.heading.toLowerCase().includes(value));
+                loadBlogs(filteredBlogs, 'blogContainer');
+            });
+
         })
         .catch(error => console.error('Error fetching blogs:', error));
 });
 
+function filterSuggestions(allTitles, suggestionsList, inputValue) {
+    suggestionsList.innerHTML = '';
+    var filteredTitles = allTitles.filter(title => title.includes(inputValue));
+    filteredTitles.forEach(title => {
+        var option = document.createElement('option');
+        option.value = title;
+        suggestionsList.appendChild(option);
+    });
+}
+
 function loadBlogsByCategory(blogDataList, containerId, category) {
     // console.log(category);
-    const filteredBlogs = blogDataList.filter(blog => blog.category === category);
+    const filteredBlogs = blogDataList.filter(blog => blog.category.toLowerCase() === category.toLowerCase());
     loadBlogs(filteredBlogs, containerId);
 }
 
@@ -143,7 +186,7 @@ function loadBlogs(blogDataList, containerId) {
             cardTitleDiv.classList.add('card-title');
 
             var h4 = document.createElement('h4');
-            h4.textContent = 'How to develop a website';
+            h4.textContent = blogData.heading;
 
             var p = document.createElement('p');
             p.textContent = blogData.content;
