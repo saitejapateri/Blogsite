@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         
             // Change the font size of the entire webpage
-            document.body.style.fontSize = fontSize;
+            desElement.style.fontSize = fontSize;
         });
         
         function createSpan(fontSize) {
