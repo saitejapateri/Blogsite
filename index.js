@@ -124,6 +124,12 @@ function loadBlogs(blogDataList, containerId) {
 
     //overwriting the content after every click event
     blogContainer.innerHTML='';
+
+    var headingElement = document.createElement('h3');
+    headingElement.textContent = "Today's picks"; 
+    headingElement.classList.add('my-3')
+    blogContainer.appendChild(headingElement);
+
     var firstBlog=true;
     var thirdBlog=true;
     var blogsPerPage = 9;
