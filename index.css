@@ -156,7 +156,7 @@ body{
 }
 
 .dark-mode{
-    background-color: #050606;
+    background-color: #292c2c;
     color: white;
 }
 
@@ -164,6 +164,11 @@ body{
   background-color: rgb(105, 105, 248) !important;
   color: white !important;
   border: none !important;
+}
+
+.dark-mode .card {
+  background-color: #292c2c; 
+  color: #fff; 
 }
 
 /* loader */
