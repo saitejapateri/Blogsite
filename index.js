@@ -4,6 +4,14 @@ $(document).ready(function() {
     }, 1500);
   });
 
+//search logo
+var searchLogo=document.getElementById("searchLogo");
+var searchForm=document.getElementById("searchForm");
+searchLogo.addEventListener('click',()=>{
+    searchLogo.style.display="none";
+    searchForm.classList.replace('d-none','d-flex');
+})
+
 var firstBlog=true;
 document.addEventListener('DOMContentLoaded', function () {
     var toggleSwitch = document.getElementById('toggleMode');
