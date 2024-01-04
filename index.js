@@ -4,6 +4,14 @@ $(document).ready(function() {
     }, 1500);
   });
 
+//search logo
+var searchLogo = document.getElementById("searchLogo");
+var searchForm = document.getElementById("searchForm");
+searchLogo.addEventListener('click',()=>{
+    searchLogo.style.display="none";
+    searchForm.classList.replace('d-none','d-flex');
+})
+
 var firstBlog=true;
 document.addEventListener('DOMContentLoaded', function () {
     var toggleSwitch = document.getElementById('toggleMode');
@@ -44,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Add active class to the clicked link
                     this.classList.add('active');
                     firstBlog=true;
+
                     if(category === 'all')
                     {
                         loadBlogs(blogDataList,'blogContainer');
@@ -53,13 +62,56 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
             });
+
+            var allTitles = blogDataList.map(post => post.heading.toLowerCase());
+            console.log(allTitles)
+            var suggestionsList = document.getElementById('suggestions-list');
+            console.log(suggestionsList)
+    
+            allTitles.forEach(title => {
+                var option = document.createElement('option');
+                option.value = title;
+                suggestionsList.appendChild(option);
+            });
+
+            var searchInput = document.getElementById('search-item');
+            searchInput.addEventListener('focus', function () {
+                searchInput.setAttribute('list', 'suggestions-list');
+            });
+
+            
+            searchInput.addEventListener('input', function () {
+                var value = searchInput.value.toLowerCase();
+                console.log(value);
+                filterSuggestions(allTitles, suggestionsList, value);
+            });
+
+            searchForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                var value = searchInput.value.toLowerCase();
+                console.log(value);
+                // Search based on title
+                var filteredBlogs = blogDataList.filter(blog => blog.heading.toLowerCase().includes(value));
+                loadBlogs(filteredBlogs, 'blogContainer');
+            });
+
         })
         .catch(error => console.error('Error fetching blogs:', error));
 });
 
+function filterSuggestions(allTitles, suggestionsList, inputValue) {
+    suggestionsList.innerHTML = '';
+    var filteredTitles = allTitles.filter(title => title.includes(inputValue));
+    filteredTitles.forEach(title => {
+        var option = document.createElement('option');
+        option.value = title;
+        suggestionsList.appendChild(option);
+    });
+}
+
 function loadBlogsByCategory(blogDataList, containerId, category) {
     // console.log(category);
-    const filteredBlogs = blogDataList.filter(blog => blog.category === category);
+    const filteredBlogs = blogDataList.filter(blog => blog.category.toLowerCase() === category.toLowerCase());
     loadBlogs(filteredBlogs, containerId);
 }
 
@@ -73,7 +125,7 @@ function loadBlogs(blogDataList, containerId) {
     //overwriting the content after every click event
     blogContainer.innerHTML='';
     var firstBlog=true;
-
+    var thirdBlog=true;
     var blogsPerPage = 9;
     var startIndex = 0;
 
@@ -81,12 +133,13 @@ function loadBlogs(blogDataList, containerId) {
     var blogsContentContainer = document.createElement('div');
     blogsContentContainer.classList.add('blogs-content-container');
     blogContainer.appendChild(blogsContentContainer);
+    
 
     // Function to display blogs
     function displayBlogs(start, end) {
         // Create blog elements for each item
         var rowDiv = document.createElement('div');
-        rowDiv.classList.add('row', 'g-4');
+        rowDiv.classList.add('row', 'g-5');
         blogsContentContainer.appendChild(rowDiv);
 
 
@@ -102,7 +155,8 @@ function loadBlogs(blogDataList, containerId) {
             blogDiv.classList.add('col');
 
             var cardDiv = document.createElement('div');
-            cardDiv.classList.add('card', 'h-100', 'mb-3', 'border-0');
+            cardDiv.classList.add('card', 'h-100','m-2','border-0','hover-pointer');
+
 
             var img = document.createElement('img');
             img.classList.add('card-img-top', 'img-fluid', 'h-100');
@@ -110,7 +164,7 @@ function loadBlogs(blogDataList, containerId) {
             img.alt = 'Blog Image';
 
             var cardBodyDiv = document.createElement('div');
-            cardBodyDiv.classList.add('card-body');
+            cardBodyDiv.classList.add('card-body','p-0','mt-2');
 
             var categoryButton = document.createElement('button');
             categoryButton.classList.add('text-primary', 'border-primary', 'mb-3');
@@ -128,6 +182,10 @@ function loadBlogs(blogDataList, containerId) {
                 ul.appendChild(li);
             });
 
+            var dateEle=document.createElement('p');
+            dateEle.textContent=blogData.date;
+
+
             var cardContentDiv = document.createElement('div');
             cardContentDiv.classList.add('card-content');
 
@@ -135,13 +193,14 @@ function loadBlogs(blogDataList, containerId) {
             cardTitleDiv.classList.add('card-title');
 
             var h4 = document.createElement('h4');
-            h4.textContent = 'How to develop a website';
+            h4.textContent = blogData.heading;
 
             var p = document.createElement('p');
             p.textContent = blogData.content;
 
             // Append elements to the DOM
             cardContentItemsDiv.appendChild(ul);
+            cardContentItemsDiv.appendChild(dateEle);
             cardTitleDiv.appendChild(h4);
             cardTitleDiv.appendChild(p);
             cardContentDiv.appendChild(cardTitleDiv);
@@ -172,6 +231,18 @@ function loadBlogs(blogDataList, containerId) {
             }(blogData));
 
             rowDiv.appendChild(blogDiv);
+
+            
+            if (i === start + 2  && thirdBlog) {
+                thirdBlog=false;
+                var horizontalLine = document.createElement('hr');
+                horizontalLine.style.marginTop="80px";
+                rowDiv.appendChild(horizontalLine);
+                var trendingHeading=document.createElement('h3');
+                trendingHeading.textContent="Trending topics";
+                trendingHeading.classList.add('mb-0','ms-2')
+                rowDiv.appendChild(trendingHeading);
+            }
         }
     }
 
@@ -180,7 +251,7 @@ function loadBlogs(blogDataList, containerId) {
 
     // Show More button
     var divButton=document.createElement('div');
-    divButton.classList.add('text-center')
+    divButton.classList.add('text-center','m-5')
     var showMoreButton = document.createElement('button');
     showMoreButton.textContent = 'SHOW MORE';
     showMoreButton.classList.add('btn', 'btn-primary', 'my-5');
