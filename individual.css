@@ -34,8 +34,21 @@ body{
     font-size: 1.2rem;
 }
 
+/* hrline */
+#hrLine{
+  margin: 5rem 8rem 0 8rem;
+}
+
 
 /*footer sytling  */
+
+#footer-left{
+  padding-left: 12%;
+}
+
+#footer-right{
+  padding-left: 9%;
+}
 
 .footer li{
     list-style-type: none;
