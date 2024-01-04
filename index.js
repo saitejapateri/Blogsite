@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Add active class to the clicked link
                     this.classList.add('active');
                     firstBlog=true;
+
                     if(category === 'all')
                     {
                         loadBlogs(blogDataList,'blogContainer');
@@ -124,7 +125,7 @@ function loadBlogs(blogDataList, containerId) {
     //overwriting the content after every click event
     blogContainer.innerHTML='';
     var firstBlog=true;
-
+    var thirdBlog=true;
     var blogsPerPage = 9;
     var startIndex = 0;
 
@@ -132,12 +133,13 @@ function loadBlogs(blogDataList, containerId) {
     var blogsContentContainer = document.createElement('div');
     blogsContentContainer.classList.add('blogs-content-container');
     blogContainer.appendChild(blogsContentContainer);
+    
 
     // Function to display blogs
     function displayBlogs(start, end) {
         // Create blog elements for each item
         var rowDiv = document.createElement('div');
-        rowDiv.classList.add('row', 'g-4');
+        rowDiv.classList.add('row', 'g-5');
         blogsContentContainer.appendChild(rowDiv);
 
 
@@ -153,7 +155,8 @@ function loadBlogs(blogDataList, containerId) {
             blogDiv.classList.add('col');
 
             var cardDiv = document.createElement('div');
-            cardDiv.classList.add('card', 'h-100', 'mb-3', 'border-0');
+            cardDiv.classList.add('card', 'h-100','m-2','border-0','hover-pointer');
+
 
             var img = document.createElement('img');
             img.classList.add('card-img-top', 'img-fluid', 'h-100');
@@ -161,7 +164,7 @@ function loadBlogs(blogDataList, containerId) {
             img.alt = 'Blog Image';
 
             var cardBodyDiv = document.createElement('div');
-            cardBodyDiv.classList.add('card-body');
+            cardBodyDiv.classList.add('card-body','p-0','mt-2');
 
             var categoryButton = document.createElement('button');
             categoryButton.classList.add('text-primary', 'border-primary', 'mb-3');
@@ -179,6 +182,10 @@ function loadBlogs(blogDataList, containerId) {
                 ul.appendChild(li);
             });
 
+            var dateEle=document.createElement('p');
+            dateEle.textContent=blogData.date;
+
+
             var cardContentDiv = document.createElement('div');
             cardContentDiv.classList.add('card-content');
 
@@ -193,6 +200,7 @@ function loadBlogs(blogDataList, containerId) {
 
             // Append elements to the DOM
             cardContentItemsDiv.appendChild(ul);
+            cardContentItemsDiv.appendChild(dateEle);
             cardTitleDiv.appendChild(h4);
             cardTitleDiv.appendChild(p);
             cardContentDiv.appendChild(cardTitleDiv);
@@ -223,6 +231,18 @@ function loadBlogs(blogDataList, containerId) {
             }(blogData));
 
             rowDiv.appendChild(blogDiv);
+
+            
+            if (i === start + 2  && thirdBlog) {
+                thirdBlog=false;
+                var horizontalLine = document.createElement('hr');
+                horizontalLine.style.marginTop="80px";
+                rowDiv.appendChild(horizontalLine);
+                var trendingHeading=document.createElement('h3');
+                trendingHeading.textContent="Trending topics";
+                trendingHeading.classList.add('mb-0','ms-2')
+                rowDiv.appendChild(trendingHeading);
+            }
         }
     }
 
@@ -231,7 +251,7 @@ function loadBlogs(blogDataList, containerId) {
 
     // Show More button
     var divButton=document.createElement('div');
-    divButton.classList.add('text-center')
+    divButton.classList.add('text-center','m-5')
     var showMoreButton = document.createElement('button');
     showMoreButton.textContent = 'SHOW MORE';
     showMoreButton.classList.add('btn', 'btn-primary', 'my-5');

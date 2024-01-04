@@ -34,8 +34,25 @@ body{
     font-size: 1.2rem;
 }
 
+.card.hover-pointer:hover {
+  cursor: pointer;
+}
+
+/* hrline */
+#hrLine{
+  margin: 0 8rem 0 8rem;
+}
 
 /*footer sytling  */
+
+#footer-left{
+  padding-left: 12%;
+}
+
+#footer-right{
+  padding-left: 9%;
+}
+
 
 .footer li{
     list-style-type: none;
