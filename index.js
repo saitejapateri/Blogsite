@@ -191,7 +191,8 @@ function loadBlogs(blogDataList, containerId) {
 
             ['author', 'role', 'readTime'].forEach(property => {
                 var li = document.createElement('li');
-                li.textContent = blogData[property];
+                li.textContent =blogData[property] + " | ";
+                li.classList.add('me-2')
                 ul.appendChild(li);
             });
 

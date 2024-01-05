@@ -28,11 +28,11 @@ body{
     width: 50%;
 }
 
-.card-content-items ul li:before{
+/* .card-content-items ul li:before{
     content: "|";
     padding-right: 5px;
     font-size: 1.2rem;
-}
+} */
 
 .card.hover-pointer:hover {
   cursor: pointer;
