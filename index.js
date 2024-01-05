@@ -234,6 +234,12 @@ function loadBlogs(blogDataList, containerId) {
                 firstBlog=false;
                 img.style.height="75%";
                 cardDiv.style.height="700px"
+                var learnButton = document.createElement('a');
+                learnButton.classList.add('text-primary')
+                learnButton.textContent="Learn more";
+                learnButton.style.fontFamily="'Epilogue', sans-serif"
+                learnButton.style.textDecoration="underline"
+                cardDiv.appendChild(learnButton);
             } else {
                 blogDiv.classList.add('col-12', 'col-sm-12', 'col-md-12', 'col-lg-6');
             }
