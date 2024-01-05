@@ -40,17 +40,17 @@ body{
 
 /* hrline */
 #hrLine{
-  margin: 0 8rem 0 8rem;
+  margin: 0 6rem 0 6rem;
 }
 
 /*footer sytling  */
 
 #footer-left{
-  padding-left: 12%;
+  padding-left: 15%;
 }
 
 #footer-right{
-  padding-left: 9%;
+  padding-left: 5%;
 }
 
 

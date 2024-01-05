@@ -1,3 +1,7 @@
+
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
 
     var toggleSwitch = document.getElementById('toggleMode');
@@ -83,6 +87,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var headingEl=document.createElement('h1');
         headingEl.textContent="Anima Introduces : Hotspot hints";
         headingEl.classList.add('mt-1')
+        headingEl.style.fontFamily="'Epilogue', sans-serif";
+        headingEl.style.fontWeight="600";
 
         // addition row for items
         var rowEle = document.createElement('div');
@@ -91,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
         //column
         var col1Div = document.createElement('div');
         col1Div.style.position="relative";
-        col1Div.classList.add('col-sm-12','col-lg-8','p-0');
+        col1Div.classList.add('col-sm-6','col-lg-8','p-0');
 
         var profilePic=document.createElement('img');
         profilePic.src="./images/author.jpg"
@@ -450,7 +456,7 @@ document.addEventListener('DOMContentLoaded', function () {
             relatedCardTitleDiv.classList.add('card-title');
 
             var relatedH4 = document.createElement('h4');
-            relatedH4.textContent = blog.title;
+            relatedH4.textContent = blog.heading;
 
             var relatedP = document.createElement('p');
             relatedP.textContent = blog.content;

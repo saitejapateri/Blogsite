@@ -16,6 +16,7 @@ var firstBlog=true;
 document.addEventListener('DOMContentLoaded', function () {
     var toggleSwitch = document.getElementById('toggleMode');
 
+    localStorage.setItem('mode','light-mode');
     var currentMode = localStorage.getItem('mode');
     if (currentMode) {
         document.body.classList.add(currentMode);
@@ -127,7 +128,9 @@ function loadBlogs(blogDataList, containerId) {
 
     var headingElement = document.createElement('h3');
     headingElement.textContent = "Today's picks"; 
-    headingElement.classList.add('my-3')
+    headingElement.classList.add('mt-5','mb-4');
+    headingElement.style.fontFamily="'Epilogue', sans-serif"
+    headingElement.style.fontWeight="450";
     blogContainer.appendChild(headingElement);
 
     var firstBlog=true;
@@ -161,13 +164,17 @@ function loadBlogs(blogDataList, containerId) {
             blogDiv.classList.add('col');
 
             var cardDiv = document.createElement('div');
-            cardDiv.classList.add('card', 'h-100','m-2','border-0','hover-pointer');
+            cardDiv.classList.add('card','border-0','hover-pointer');
+            cardDiv.style.height="600px"
+            cardDiv.style.marginBottom="5rem";
 
 
             var img = document.createElement('img');
-            img.classList.add('card-img-top', 'img-fluid', 'h-100');
+            img.classList.add('card-img-top');
             img.src = blogData.imageSrc;
             img.alt = 'Blog Image';
+            img.style.height="300px";
+            img.style.maxWidth="100%";
 
             var cardBodyDiv = document.createElement('div');
             cardBodyDiv.classList.add('card-body','p-0','mt-2');
@@ -224,6 +231,8 @@ function loadBlogs(blogDataList, containerId) {
             if (firstBlog) {
                 blogDiv.classList.add('col-12', 'col-sm-12', 'col-md-12', 'col-lg-12');
                 firstBlog=false;
+                img.style.height="75%";
+                cardDiv.style.height="700px"
             } else {
                 blogDiv.classList.add('col-12', 'col-sm-12', 'col-md-12', 'col-lg-6');
             }
@@ -242,7 +251,7 @@ function loadBlogs(blogDataList, containerId) {
             if (i === start + 2  && thirdBlog) {
                 thirdBlog=false;
                 var horizontalLine = document.createElement('hr');
-                horizontalLine.style.marginTop="80px";
+                horizontalLine.style.marginTop="0px";
                 rowDiv.appendChild(horizontalLine);
                 var trendingHeading=document.createElement('h3');
                 trendingHeading.textContent="Trending topics";
