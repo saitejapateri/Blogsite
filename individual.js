@@ -204,12 +204,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         function shareOnWhatsapp(imgSrc) {
-            url='whatsapp://send?text='+encodeURIComponent(imgSrc);
+            url='whatsapp://send?text='+ imgSrc;
             window.open(url,'_blank');
         }
 
-        function shareOnInsta(imageSrc) {
-            window.open('instagram://library?AssetPath=' + encodeURIComponent(imageSrc), '_blank');
+        function shareOnInsta(imgSrc) {
+            window.open('instagram://library?AssetPath=' + imgSrc , '_blank');
         }
         
         shareButton.addEventListener('click', function () {
