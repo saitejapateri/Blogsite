@@ -94,6 +94,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Search based on title
                 var filteredBlogs = blogDataList.filter(blog => blog.heading.toLowerCase().includes(value));
                 loadBlogs(filteredBlogs, 'blogContainer');
+                searchLogo.style.display="block";
+                searchForm.classList.replace('d-flex','d-none');
             });
 
         })
