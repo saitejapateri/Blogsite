@@ -221,8 +221,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         
         dropdownMenu.style.position = 'absolute';
-        dropdownMenu.style.top = '40px';
-        dropdownMenu.style.left = '0';
+        dropdownMenu.style.top = '45px';
+        dropdownMenu.style.left = '300px';
         dropdownMenu.style.backgroundColor = 'white';
         dropdownMenu.style.border = '1px solid #ccc';
         dropdownMenu.style.padding = '5px';
