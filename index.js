@@ -172,7 +172,7 @@ function loadBlogs(blogDataList, containerId) {
 
 
             var img = document.createElement('img');
-            img.classList.add('card-img-top');
+            img.classList.add('card-img-top','rounded');
             img.src = blogData.imageSrc;
             img.alt = 'Blog Image';
             img.style.height="300px";
@@ -232,7 +232,7 @@ function loadBlogs(blogDataList, containerId) {
 
             // first card occupies 100% (i.e., 12 columns)
             if (firstBlog) {
-                blogDiv.classList.add('col-12', 'col-sm-12', 'col-md-12', 'col-lg-12');
+                blogDiv.classList.add('col-12', 'col-sm-12', 'col-md-12', 'col-lg-12','mb-3');
                 firstBlog=false;
                 img.style.height="75%";
                 cardDiv.style.height="700px"

@@ -91,14 +91,10 @@ document.addEventListener('DOMContentLoaded', function () {
         headingEl.style.fontWeight="600";
 
         // addition row for items
-        var rowEle = document.createElement('div');
-        rowEle.classList.add('row','mt-4','mb-2');
+        var propertiesDiv = document.createElement('div');
+        propertiesDiv.classList.add('d-inline-flex','flex-wrap')
         
-        //column
-        var col1Div = document.createElement('div');
-        col1Div.style.position="relative";
-        col1Div.classList.add('col-sm-6','col-lg-8','p-0');
-
+        var imgDiv=document.createElement('div');
         var profilePic=document.createElement('img');
         profilePic.src="./images/author.jpg"
         profilePic.style.width="50px";
@@ -106,29 +102,28 @@ document.addEventListener('DOMContentLoaded', function () {
         profilePic.style.borderRadius="50%"
         profilePic.style.float="left";
         profilePic.classList.add('mx-3','my-2')
-        col1Div.appendChild(profilePic);
+        imgDiv.appendChild(profilePic);
 
+        var pDiv=document.createElement('div');
         var p1Ele=document.createElement('p');
         p1Ele.textContent=blog.author + " | " + blog.role;
         var p2Ele=document.createElement('p');
         p2Ele.textContent=blog.date + " | " + blog.readTime;
-        col1Div.appendChild(p1Ele);
-        col1Div.appendChild(p2Ele);
+        pDiv.appendChild(p1Ele);
+        pDiv.appendChild(p2Ele);
 
+
+        var shareDiv=document.createElement('div');
         var shareButton=document.createElement('img');
+        shareButton.classList.add('ms-4','my-2')
         shareButton.src="https://cdn.icon-icons.com/icons2/878/PNG/512/share-symbol_icon-icons.com_68493.png";
         shareButton.style.width="30px"
-        shareButton.style.position="absolute";
-        shareButton.style.top="20px"
-        shareButton.style.left="280px";
-        shareButton.classList.add();
-        col1Div.appendChild(shareButton);
+        shareDiv.appendChild(shareButton);
     
         var dropdownMenu = document.createElement('div');
         dropdownMenu.classList.add('dropdown-menu');
         dropdownMenu.style.display = 'none';
-        // dropdownMenu.style.position='absolute'
-        col1Div.appendChild(dropdownMenu);
+        shareDiv.appendChild(dropdownMenu);
         
         // Add items to the dropdown menu
         var whatsappItem = createDropdownItem('WhatsApp', 'https://whatsapp.com/link');
@@ -220,20 +215,15 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
         
-        dropdownMenu.style.position = 'absolute';
-        dropdownMenu.style.top = '45px';
-        dropdownMenu.style.left = '300px';
         dropdownMenu.style.backgroundColor = 'white';
         dropdownMenu.style.border = '1px solid #ccc';
         dropdownMenu.style.padding = '5px';
         dropdownMenu.style.zIndex = '1';
 
 
+        var fontDiv=document.createElement('div');
         var fontSizeSlider=document.createElement('div');
-        fontSizeSlider.classList.add('slider-container');
-        fontSizeSlider.style.position="absolute";
-        fontSizeSlider.style.top="10px";
-        fontSizeSlider.style.right="400px";
+        fontSizeSlider.classList.add('slider-container','mx-5');
 
         var labelContainer=document.createElement('div');
         labelContainer.classList.add('label-container');
@@ -259,26 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
             dataList.appendChild(option);
         });
 
-        // var span1=document.createElement('span');
-        // span1.classList.add('mx-1')
-        // span1.textContent='aA';
-        // span1.style.fontSize="12px";
-        // var span2=document.createElement('span');
-        // span2.classList.add('mx-1')
-        // span2.textContent='aA';
-        // span2.style.fontSize="14px";
-        // var span3=document.createElement('span');
-        // span3.classList.add('mx-1')
-        // span3.textContent='aA';
-        // span3.style.fontSize="17px";
-        // var span4=document.createElement('span');
-        // span4.classList.add('mx-1')
-        // span4.textContent='aA';
-        // span4.style.fontSize="20px";
-        // var span5=document.createElement('span');
-        // span5.classList.add('mx-1')
-        // span5.textContent='aA';
-        // span5.style.fontSize="22px";
+
         var span1 = createSpan('14px');
         var span2 = createSpan('16px');
         var span3 = createSpan('18px');
@@ -295,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         fontSizeSlider.appendChild(labelContainer);
         fontSizeSlider.appendChild(inputRange);
-        col1Div.appendChild(fontSizeSlider);
+        fontDiv.appendChild(fontSizeSlider);
         inputRange.addEventListener('input', function () {
             var fontSize;
             switch (parseInt(this.value)) {
@@ -331,10 +302,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
 
-        rowEle.appendChild(col1Div);
+        propertiesDiv.appendChild(imgDiv);
+        propertiesDiv.appendChild(pDiv);
+        propertiesDiv.appendChild(shareDiv);
+        propertiesDiv.appendChild(fontSizeSlider);
+
         itemsDiv.appendChild(backButtonDiv);
         itemsDiv.appendChild(headingEl);
-        itemsDiv.appendChild(rowEle);
+        itemsDiv.appendChild(propertiesDiv);
 
 
         var img = document.createElement('img');
